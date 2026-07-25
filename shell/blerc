@@ -1,0 +1,14 @@
+# Auto-suggestion ghost text (Muted Tokyo Night Slate)
+ble-face -s auto_complete "fg=#565f89,italic"
+
+# Valid commands - builtins, aliases, functions, executables (Cyberpunk Electric Cyan)
+ble-face -s syntax_command "fg=#2ac3de,bold"
+
+# Command errors / typos (Cyberpunk Neon Pink)
+ble-face -s syntax_error "fg=#ff2a6d,bold"
+
+# Strings and quotes (Tokyo Night Green)
+ble-face -s syntax_quoted "fg=#9ece6a"
+
+# Comments (Muted Slate)
+ble-face -s syntax_comment "fg=#565f89,italic"

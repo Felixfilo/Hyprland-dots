@@ -1,0 +1,382 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[░▒▓](#ff2a6d)\
+$os\
+$username\
+[](bg:#2ac3de fg:#ff2a6d)\
+$directory\
+[](fg:#2ac3de bg:#3d59a1)\
+$git_branch\
+$git_status\
+[](fg:#3d59a1 bg:#1f2335)\
+$nodejs\
+$bun\
+$rust\
+$golang\
+$php\
+[](fg:#1f2335 bg:#16161e)\
+$time\
+[ ](fg:#16161e)\
+\n$character"""
+
+[os]
+disabled = false
+style = "bg:#ff2a6d fg:#16161e"
+
+[os.symbols]
+Windows          = "󰍲"
+Ubuntu           = "󰕈"
+SUSE             = "󰠠"
+Raspbian         = "󰐿"
+Mint             = "󰣭"
+Macos            = "󰀵"
+Manjaro          = "󰣘"
+Linux            = "󰌽"
+Gentoo           = "󰣨"
+Fedora           = "󰣛"
+Alpine           = "󰣀"
+Amazon           = "󰅨"
+Android          = "󰀙"
+AOSC             = "󰞔"
+Arch             = "󰣇"
+Artix            = "󰣇"
+EndeavourOS      = ""
+CentOS           = "󰣤"
+Debian           = "󰣚"
+Redhat           = "󱄛"
+RedHatEnterprise = "󱄛"
+Pop              = "󰣫"
+
+[username]
+show_always = true
+style_user  = "bg:#ff2a6d fg:#16161e"
+style_root  = "bg:#ff2a6d fg:#16161e"
+format      = '[ $user ]($style)'
+
+[directory]
+style             = "fg:#16161e bg:#2ac3de"
+format            = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"~" = "  "
+"Applications" = "  "
+"Desktop" = "  "
+"Developer" = "  "
+"Documents" = " 󰈙 "
+"Downloads" = "  "
+"Games" = "  "
+"GitHub" = "  "
+"Library" = "  "
+"Movies" = "  "
+"Music" = "  "
+"Pictures" = "  "
+"Projects" = "  "
+"Public" = "  "
+"Screenshots" = " 󱣴 "
+"Videos" = "  "
+"Thunderbird" = "   "
+"source" = " 󰈹 "
+"comm" = "  "
+
+[git_branch]
+symbol = ""
+style  = "bg:#3d59a1"
+format = '[[ $symbol $branch ](fg:#2ac3de bg:#3d59a1)]($style)'
+
+[git_status]
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+format = '[[( $all_status$ahead_behind )](fg:#ff2a6d)]($style)'
+style = "bg:#3d59a1"
+
+[time]
+disabled = false
+style = "bg:#16161e fg:#7dcfff"
+format = '[ $time ]($style)'
+
+[deno]
+format = " [deno](italic) [ ](#9ece6a bold)"
+version_format = "${raw}"
+
+[lua]
+format = " [lua](italic) [${symbol}]($style)"
+style = "bold #e0af68"
+symbol = "⨀ "
+version_format = "${raw}"
+
+[nodejs]
+detect_extensions = []
+detect_files = ["package-lock.json", "yarn.lock"]
+detect_folders = ["node_modules"]
+format = "[ ](bold #9ece6a)"
+version_format = "${raw}"
+
+[python]
+format = "[${symbol}(${virtualenv}) ${version}]($style)"
+style = "bold #e0af68"
+symbol = "[ ](bold #7dcfff)"
+version_format = "${raw}"
+
+[ruby]
+format = " [rb](italic) [${symbol}]($style)"
+style = "bold #ff2a6d"
+symbol = " "
+version_format = "${raw}"
+
+[rust]
+style = "bold #ff9e64"
+format = " rs(italic) $symbol($style)"
+symbol = " "
+
+[swift]
+format = " [sw](italic) [${symbol}]($style)"
+style = "bold #ff2a6d"
+symbol = " "
+version_format = "${raw}"
+
+[aws]
+disabled = true
+format = " [aws](italic) [$symbol $profile $region]($style)"
+style = "bold #7dcfff"
+symbol = " "
+
+[buf]
+style = "bold #ff2a6d"
+format = " [buf](italic) [$symbol $buf_version]($style)"
+symbol = "■ "
+
+[c]
+style = "bold #2ac3de"
+format = " [$symbol(-$name)]($style)"
+symbol = "ℂ "
+
+[cpp]
+style = "bold #2ac3de"
+format = " [cpp](italic) [$symbol]($style)"
+symbol = " "
+
+[kotlin]
+format = " [kotlin](italic) [$symbol]($style)"
+style = "bold #ff2a6d"
+symbol = " "
+
+[ocaml]
+format = " [ocaml](italic) [$symbol]($style)"
+style = "bold #e0af68"
+symbol = " "
+
+[perl]
+format = " [perl](italic) [$symbol]($style)"
+style = "bold #2ac3de"
+symbol = " "
+
+[php]
+format = " [php](italic) [$symbol]($style)"
+style = "bold #bb9af7"
+symbol = " "
+
+[pixi]
+format = " [pixi](italic) [$symbol]($style)"
+style = "bold #e0af68"
+symbol = "pixi "
+
+[rlang]
+format = " [rlang](italic) [$symbol]($style)"
+style = "bold #2ac3de"
+symbol = " "
+
+[meson]
+format = " [meson](italic) [$symbol]($style)"
+style = "bold #ff2a6d"
+symbol = "meson "
+
+[conda]
+style = "bold #9ece6a"
+format = " conda [$symbol$environment]($style)"
+symbol = "◯ "
+
+[dart]
+style = "bold #2ac3de"
+format = " dart [$symbol]($style)"
+symbol = " "
+
+[elixir]
+style = "bold #bb9af7"
+format = " exs [$symbol OTP $otp_version ]($style)"
+symbol = " "
+
+[elm]
+style = "bold #2ac3de"
+format = " elm [$symbol]($style)"
+symbol = "◩ "
+
+[golang]
+style = "bold #7dcfff"
+format = " go [$symbol]($style)"
+symbol = "∩ "
+
+[haskell]
+style = "bold #bb9af7"
+format = " hs [$symbol]($style)"
+symbol = "❯λ "
+
+[java]
+style = "bold #ff2a6d"
+format = " java [${symbol}]($style)"
+symbol = " "
+
+[julia]
+style = "bold #bb9af7"
+format = " jl [$symbol]($style)"
+symbol = "◎ "
+
+[memory_usage]
+style = "bold #2ac3de"
+format = " mem [${ram}( ${swap})]($style)"
+symbol = "▪▫▪ "
+
+[nim]
+style = "bold #e0af68"
+format = " nim [$symbol]($style)"
+symbol = "▴▲▴ "
+
+[nix_shell]
+format = '[$symbol nix⎪$state⎪]($style) [$name](italic dimmed white)'
+impure_msg = '[⌽](bold dimmed #ff2a6d)'
+pure_msg = '[⌾](bold dimmed #9ece6a)'
+style = 'bold italic dimmed #7dcfff'
+symbol = ' '
+unknown_msg = '[◌](bold dimmed #e0af68)'
+
+[spack]
+style = "bold #e0af68"
+format = " spack [$symbol$environment]($style)"
+symbol = "◇ "
+
+[zig]
+style = "bold #e0af68"
+format = " zig [$symbol]($style)"
+symbol = " "
+
+[scala]
+format = " scala [$symbol]($style)"
+symbol = " "
+
+[singularity]
+style = "bold #e0af68"
+format = " [singularity](italic) [$symbol]($style)"
+symbol = "singularity "
+
+[kubernetes]
+style = "bold #2ac3de"
+format = " [kubernetes](italic) [$symbol]($style)"
+symbol = " "
+
+[vcsh]
+style = "bold #ff2a6d"
+format = " [vcsh](italic) [$symbol]($style)"
+symbol = "vcsh "
+
+[cobol]
+style = "bold #e0af68"
+format = " [cobol](italic) [$symbol]($style)"
+symbol = "cobol "
+
+[daml]
+style = "bold #2ac3de"
+format = " [daml](italic) [$symbol]($style)"
+symbol = "daml "
+
+[dotnet]
+style = "bold #bb9af7"
+format = " [dotnet](italic) [$symbol]($style)"
+symbol = ".NET "
+
+[erlang]
+style = "bold #ff2a6d"
+format = " [erlang](italic) [$symbol]($style)"
+symbol = " "
+
+[fennel]
+style = "bold #2ac3de"
+format = " [fennel](italic) [$symbol]($style)"
+symbol = " "
+
+[haxe]
+style = "bold #ff9e64"
+format = " [haxe](italic) [$symbol]($style)"
+symbol = " "
+
+[helm]
+style = "bold #2ac3de"
+format = " [helm](italic) [$symbol]($style)"
+symbol = "helm "
+
+[opa]
+style = "bold #2ac3de"
+format = " [opa](italic) [$symbol]($style)"
+symbol = "opa "
+
+[pulumi]
+format = " [pulumi](italic) [$symbol]($style)"
+style = "bold #ff2a6d"
+symbol = "pulumi "
+
+[purescript]
+style = "bold #e0af68"
+format = " [purescript](italic) [$symbol]($style)"
+symbol = " "
+
+[raku]
+style = "bold #2ac3de"
+format = " [raku](italic) [$symbol]($style)"
+symbol = "raku "
+
+[red]
+style = "bold #ff2a6d"
+format = " [red](italic) [$symbol]($style)"
+symbol = "red "
+
+[solidity]
+style = "bold #e0af68"
+format = " [solidity](italic) [$symbol]($style)"
+symbol = " "
+
+[terraform]
+style = "bold #bb9af7"
+format = " [terraform](italic) [$symbol]($style)"
+symbol = "terraform "
+
+[vlang]
+format = " [vlang](italic) [$symbol]($style)"
+style = "bold #ff2a6d"
+symbol = "vlang "
+
+[vagrant]
+format = " [vagrant](italic) [$symbol]($style)"
+style = "bold #7dcfff"
+symbol = "vagrant "
+
+[gcloud]
+format = " [gcloud](italic) [$symbol]($style)"
+style = "bold #2ac3de"
+symbol = "gcloud "
+
+[openstack]
+format = " [openstack](italic) [$symbol]($style)"
+style = "bold #ff2a6d"
+symbol = "openstack "
+
+[azure]
+format = " [azure](italic) [$symbol]($style)"
+style = "bold #2ac3de"
+symbol = " "
+
+[crystal]
+format = " [crystal](italic) [$symbol]($style)"
+style = "bold #2ac3de"
+symbol = " "
