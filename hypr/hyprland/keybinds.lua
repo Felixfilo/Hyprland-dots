@@ -1,57 +1,76 @@
 local vars = require("variables")
+local fn = require("utils.functions")
 
--- Direct readable binds.
-hl.bind("SUPER + C", hl.dsp.exec_cmd(vars.editor), {
-    description = "Open VS Code",
-})
+-- Applications and Noctalia
+hl.bind("SUPER + Return", hl.dsp.exec_cmd(vars.terminal), { description = "Open terminal" })
+hl.bind("SUPER + E", hl.dsp.exec_cmd(vars.fileExplorer), { description = "Open file manager" })
+hl.bind("SUPER + T", hl.dsp.exec_cmd(vars.editor), { description = "Open editor" })
+hl.bind("SUPER + C", hl.dsp.exec_cmd(vars.editor), { description = "Open VS Code" })
+hl.bind("SUPER + W", hl.dsp.exec_cmd(vars.browser), { description = "Open browser" })
+hl.bind("SUPER + B", hl.dsp.exec_cmd(vars.browser), { description = "Open browser" })
+hl.bind("XF86Calculator", hl.dsp.exec_cmd(vars.office), { description = "Open office" })
+hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"), { description = "Open launcher", release = true })
+hl.bind("SUPER + Space", hl.dsp.window.float({ action = "toggle" }), { description = "Toggle floating" })
+hl.bind("SUPER + X", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"), { description = "Open control center" })
+hl.bind("SUPER + Z", hl.dsp.exec_cmd("noctalia msg settings-toggle"), { description = "Open settings" })
+hl.bind("SUPER + L", hl.dsp.exec_cmd("noctalia msg session lock"), { description = "Lock screen" })
+hl.bind("SUPER + ALT + C", hl.dsp.exec_cmd("noctalia msg panel-toggle session"), { description = "Open session panel" })
+hl.bind("SUPER + H", hl.dsp.exec_cmd("noctalia msg panel-toggle kenn/keybind-cheatsheet:cheatsheet"), { description = "Toggle keybind cheatsheet" })
 
-hl.bind("SUPER + B", hl.dsp.exec_cmd(vars.browser), {
-    description = "Open browser",
-})
+-- Window management
+hl.bind("SUPER + Escape", hl.dsp.exec_cmd("hyprctl kill"), { description = "Kill active window" })
+hl.bind("SUPER + Q", hl.dsp.window.close(), { description = "Close window" })
+hl.bind("SUPER + D", hl.dsp.window.fullscreen({ mode = 1 }), { description = "Toggle fullscreen" })
+hl.bind("SUPER + F", hl.dsp.window.fullscreen(), { description = "Fullscreen window" })
+hl.bind("SUPER + J", hl.dsp.layout("togglesplit"), { description = "Toggle split layout" })
+hl.bind("ALT + Tab", hl.dsp.window.cycle_next(), { description = "Cycle windows" })
+hl.bind("SUPER + Tab", hl.dsp.exec_cmd("noctalia msg window-switcher"), { description = "Open window switcher" })
+hl.bind("SUPER + Left", hl.dsp.focus({ direction = "left" }), { description = "Focus left" })
+hl.bind("SUPER + Right", hl.dsp.focus({ direction = "right" }), { description = "Focus right" })
+hl.bind("SUPER + Up", hl.dsp.focus({ direction = "up" }), { description = "Focus up" })
+hl.bind("SUPER + Down", hl.dsp.focus({ direction = "down" }), { description = "Focus down" })
+hl.bind("SUPER + SHIFT + Left", hl.dsp.window.move({ direction = "l" }), { description = "Move window left" })
+hl.bind("SUPER + SHIFT + Right", hl.dsp.window.move({ direction = "r" }), { description = "Move window right" })
+hl.bind("SUPER + SHIFT + Up", hl.dsp.window.move({ direction = "u" }), { description = "Move window up" })
+hl.bind("SUPER + SHIFT + Down", hl.dsp.window.move({ direction = "d" }), { description = "Move window down" })
+hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { description = "Move window with mouse" })
+hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { description = "Resize window with mouse" })
+hl.bind("SUPER + P", hl.dsp.window.pin(), { description = "Pin window" })
+hl.bind("SUPER + ALT + F", hl.dsp.window.fullscreen({ mode = "maximized" }), { description = "Maximize window" })
+hl.bind("SUPER + ALT + Space", hl.dsp.window.float({ action = "toggle" }), { description = "Toggle floating window" })
 
-hl.bind("SUPER + T", hl.dsp.exec_cmd(vars.terminal), {
-    description = "Open terminal",
-})
+-- Special workspaces
+hl.bind("SUPER + S", fn.toggle("specialws"), { description = "Toggle scratchpad" })
+hl.bind("CTRL + SHIFT + Escape", fn.toggle("sysmon"), { description = "Toggle system monitor" })
+hl.bind("SUPER + M", fn.toggle("music"), { description = "Toggle music workspace" })
+hl.bind("SUPER + ALT + D", fn.toggle("communication"), { description = "Toggle communication workspace" })
+hl.bind("SUPER + R", fn.toggle("todo"), { description = "Toggle todo workspace" })
+hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special:special" }), { description = "Move window to scratchpad" })
 
-hl.bind("SUPER + E", hl.dsp.exec_cmd(vars.fileExplorer), {
-    description = "Open file manager",
-})
+-- Workspace navigation
+hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "m-1" }), { description = "Previous workspace", repeating = true })
+hl.bind("SUPER + mouse_up", hl.dsp.focus({ workspace = "m+1" }), { description = "Next workspace", repeating = true })
+hl.bind("CTRL + SUPER + Left", hl.dsp.focus({ workspace = "m-1" }), { description = "Previous workspace" })
+hl.bind("CTRL + SUPER + Right", hl.dsp.focus({ workspace = "m+1" }), { description = "Next workspace" })
+hl.bind("CTRL + SUPER + Down", hl.dsp.focus({ workspace = "emptym" }), { description = "Next empty workspace" })
+for i = 1, 10 do
+    local key = i % 10
+    hl.bind("SUPER + " .. key, hl.dsp.focus({ workspace = i }), { description = "Focus workspace " .. i })
+    hl.bind("SUPER + ALT + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }), { description = "Move window to workspace " .. i })
+end
 
-hl.bind("SUPER + Space", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"), {
-    description = "Open launcher",
-})
-
-hl.bind("SUPER + X", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"), {
-    description = "Open control center",
-})
-
-hl.bind("SUPER + Comma", hl.dsp.exec_cmd("noctalia msg settings-toggle"), {
-    description = "Toggle settings",
-})
-
-hl.bind("SUPER + L", hl.dsp.exec_cmd("noctalia msg session lock"), {
-    description = "Lock screen",
-})
-
-hl.bind("SUPER + H", hl.dsp.exec_cmd("noctalia msg panel-toggle kenn/keybind-cheatsheet:cheatsheet"), {
-    description = "Toggle keybind cheatsheet",
-})
-
-hl.bind("ALT + Tab", hl.dsp.window.cycle_next(), {
-    description = "Cycle windows",
-})
-
-hl.bind("CTRL + ALT + C", hl.dsp.exec_cmd("noctalia msg notification-clear-active"), {
-    description = "Clear notifications",
-    locked = true,
-})
-
-hl.bind("CTRL + SUPER + SHIFT + R", hl.dsp.exec_cmd("pkill noctalia"), {
-    description = "Restart Noctalia",
-    release = true,
-})
-
-hl.bind("CTRL + SUPER + ALT + R", hl.dsp.exec_cmd("pkill noctalia; sleep 0.2; noctalia"), {
-    description = "Restart and relaunch Noctalia",
-    release = true,
-})
+-- Hardware and utilities
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("noctalia msg volume-up"), { description = "Increase volume", locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("noctalia msg volume-down"), { description = "Decrease volume", locked = true, repeating = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("noctalia msg volume-mute"), { description = "Mute volume", locked = true })
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("noctalia msg mic-mute"), { description = "Mute microphone", locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("noctalia msg media toggle"), { description = "Play or pause media", locked = true })
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("noctalia msg media next"), { description = "Next media", locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("noctalia msg media previous"), { description = "Previous media", locked = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("noctalia msg brightness-up"), { description = "Increase brightness", locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("noctalia msg brightness-down"), { description = "Decrease brightness", locked = true, repeating = true })
+hl.bind("Print", hl.dsp.exec_cmd("noctalia msg screenshot-region"), { description = "Take region screenshot" })
+hl.bind("SUPER + Print", hl.dsp.exec_cmd("noctalia msg screenshot-fullscreen"), { description = "Take fullscreen screenshot" })
+hl.bind("SUPER + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"), { description = "Open clipboard" })
+hl.bind("SUPER + SHIFT + W", hl.dsp.exec_cmd("noctalia msg panel-toggle wallpaper"), { description = "Open wallpaper panel" })
+hl.bind("SUPER + A", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center notifications"), { description = "Open notifications" })

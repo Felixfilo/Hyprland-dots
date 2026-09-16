@@ -261,9 +261,10 @@ local function toggle(special_workspace)
 
         local on_correct_ws = active_workspace and active_workspace.name == "special:" .. special_workspace
 
-        -- Focus workspace before apps
+        -- Toggle the special workspace explicitly so reopening it restores the
+        -- existing app instead of focusing an empty normal workspace.
         if not on_correct_ws then
-            hl.dispatch(hl.dsp.focus({ workspace = "special:" .. special_workspace }))
+            hl.dispatch(hl.dsp.workspace.toggle_special(special_workspace))
         end
 
         local apps = load_toggle_config()[special_workspace]
